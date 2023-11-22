@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'functions/functions.dart';
+import 'widgets/politica_privacidade_button.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -14,6 +17,11 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final Uri _url = Uri.parse('https://google.com.br');
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 
   @override
   void dispose() {
@@ -22,20 +30,15 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorTwo,
       body: Container(
+        alignment: Alignment.center,
         width: double.maxFinite,
         height: double.maxFinite,
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -79,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                       return 'Deve ter no máximo 20 caracteres';
                     } else if (!RegExp(r'^[a-zA-Z0-9\s]*[^\s]$')
                         .hasMatch(value)) {
-                          userController.clear();
+                      userController.clear();
                       return 'Não deve conter espaço em branco no final.';
                     } else {
                       return null;
@@ -115,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                       return 'Deve ter no máximo 20 caracteres';
                     } else if (!RegExp(r'^[a-zA-Z0-9]*[^\\s]$')
                         .hasMatch(value)) {
-                          passwordController.clear();
+                      passwordController.clear();
                       return 'Deve conter apenas letras e números';
                     } else {
                       return null;
@@ -149,12 +152,7 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           alignment: Alignment.center,
           height: 80,
-          child: TextButton(
-              onPressed: _launchUrl,
-              child: const Text(
-                'Política de Privacidade',
-                style: TextStyle(color: Colors.white),
-              ))),
+          child: const PoliticaPrivacidadeButton()),
     );
   }
 }
