@@ -62,9 +62,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Informe um email';
-                } else if (!value.contains('@')) {
-                  return 'Informe um email válido';
+                  return 'Informe um nome de usuário';
+                } else if (value.length > 21) {
+                  return 'Deve ter no máximo 20 caracteres';
+                } else if (!RegExp(r'^[a-zA-Z0-9\s]*[^\s]$').hasMatch(value)) {
+                  return 'DNão deve conter espaço em branco no final.';
                 } else {
                   return null;
                 }
@@ -92,11 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               validator: (value) {
-                if (value!.length < 6) {
-                  return 'Deve ter no mínimo 6 caracteres';
-                } else if (!RegExp(r'^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$')
-                    .hasMatch(value)) {
-                  return 'Deve conter pelo menos uma letra maiúscula e um número';
+                if (value!.length < 2) {
+                  return 'Deve ter no mínimo 2 caracteres';
+                } else if (value.length > 21) {
+                  return 'Deve ter no máximo 20 caracteres';
+                } else if (!RegExp(r'^[a-zA-Z0-9]*[^\\s]$').hasMatch(value)) {
+                  return 'Deve conter apenas letras e números';
                 } else {
                   return null;
                 }
