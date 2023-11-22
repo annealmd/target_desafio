@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import 'functions/functions.dart';
 import 'widgets/politica_privacidade_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,12 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final Uri _url = Uri.parse('https://google.com.br');
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
+ 
 
   @override
   void dispose() {
