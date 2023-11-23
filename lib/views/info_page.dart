@@ -16,6 +16,8 @@ class _InfoPageState extends State<InfoPage> {
   final TextEditingController infoTextController = TextEditingController();
 
   final FocusNode infoFocusNode = FocusNode();
+  bool editText = false;
+  Map infoToBeEdited = {'text': '', 'index': -1};
 
   @override
   void dispose() {
@@ -26,8 +28,6 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     List<String> list = controller.infoList;
-    var editText = false;
-    late Map infoToBeEdited;
 
     infoFocusNode.requestFocus();
     return Scaffold(
@@ -71,14 +71,12 @@ class _InfoPageState extends State<InfoPage> {
                             children: <Widget>[
                               IconButton(
                                 onPressed: () {
-                                  infoToBeEdited = {
-                                    'text': list[i],
-                                    'index': i
-                                  };
-                                  debugPrint('Editing $infoToBeEdited');
+                                  editText = true;
+                                  infoToBeEdited['text'] = list[i];
+                                  infoToBeEdited['index'] = i;
+
                                   infoTextController.text =
                                       infoToBeEdited['text'];
-                                  editText = true;
                                 },
                                 icon: const Icon(
                                   Icons.edit,
@@ -96,7 +94,12 @@ class _InfoPageState extends State<InfoPage> {
                                       MaterialStatePropertyAll<Color>(
                                           Color.fromARGB(255, 187, 16, 4)),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  
+                                  setState(() {
+                                    controller.deleteInfo(i);
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -125,7 +128,15 @@ class _InfoPageState extends State<InfoPage> {
                   filled: true,
                   fillColor: Colors.white,
                 ),
-                //focusNode: infoFocusNode,
+                onSubmitted: (value) {
+                  editText
+                      ? controller.editInfo(
+                          infoToBeEdited['index'], infoTextController.text)
+                      : controller.addInfo(infoTextController.text);
+                  infoTextController.clear();
+                  editText = false;
+                },
+                
               )
             ],
           ),

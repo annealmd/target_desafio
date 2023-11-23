@@ -1,13 +1,7 @@
+import 'package:flutter/material.dart';
+
 class InfoController {
-  final List<String> _infoList = [
-    'Fazer o teste',
-    'Ir na academia',
-    'Supermercado para comprar Verduras',
-    'Aniversário da Maria',
-    'Andar de Bike',
-    'Correr 10 km',
-    'Ler um livro',
-  ];
+  final List<String> _infoList = [];
 
   List<String> get infoList => _infoList;
 
@@ -22,7 +16,9 @@ class InfoController {
   }
 
   List<String> deleteInfo(int index) {
+    debugPrint(_infoList[index]);
     _infoList.removeAt(index);
+
     return _infoList;
   }
 }
