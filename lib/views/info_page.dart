@@ -26,8 +26,9 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     List<String> list = controller.infoList;
+    var editText = false;
+    late Map infoToBeEdited;
 
-    var infoToBeEdited = {'text': '', 'index': 0};
     infoFocusNode.requestFocus();
     return Scaffold(
       backgroundColor: colorTwo,
@@ -55,9 +56,6 @@ class _InfoPageState extends State<InfoPage> {
                   child: ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (_, i) {
-                        infoToBeEdited['text'] = list[i];
-                        infoToBeEdited['index'] = i;
-                        debugPrint('Editing $infoToBeEdited');
                         return ListTile(
                           title: Text(
                             list[i],
@@ -72,7 +70,16 @@ class _InfoPageState extends State<InfoPage> {
                             alignment: WrapAlignment.end,
                             children: <Widget>[
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  infoToBeEdited = {
+                                    'text': list[i],
+                                    'index': i
+                                  };
+                                  debugPrint('Editing $infoToBeEdited');
+                                  infoTextController.text =
+                                      infoToBeEdited['text'];
+                                  editText = true;
+                                },
                                 icon: const Icon(
                                   Icons.edit,
                                   size: 30,
@@ -104,6 +111,7 @@ class _InfoPageState extends State<InfoPage> {
               TextField(
                 autofocus: true,
                 //focusNode: infoFocusNode,
+                showCursor: true,
                 controller: infoTextController,
                 maxLength: 50,
                 textAlign: TextAlign.center,
