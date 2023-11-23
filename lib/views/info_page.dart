@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:target_test/controllers/info_controller.dart';
 import 'package:target_test/core/theme.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:target_test/stores/info_store.dart';
 
 import 'widgets/politica_privacidade_button.dart';
 
@@ -12,8 +13,8 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-  final InfoController controller = InfoController();
   final TextEditingController infoTextController = TextEditingController();
+  final _infoStore = InfoStore();
 
   final FocusNode infoFocusNode = FocusNode();
   bool editText = false;
@@ -27,8 +28,6 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = controller.infoList;
-
     infoFocusNode.requestFocus();
     return Scaffold(
       backgroundColor: colorTwo,
@@ -50,65 +49,65 @@ class _InfoPageState extends State<InfoPage> {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.5,
-                child: Card(
-                  elevation: 8,
-                  surfaceTintColor: Colors.white,
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (_, i) {
-                        return ListTile(
-                          title: Text(
-                            list[i],
-                            style: const TextStyle(
-                                overflow: TextOverflow.clip,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                            maxLines: 5,
-                          ),
-                          trailing: Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.start,
-                            alignment: WrapAlignment.end,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: () {
-                                  editText = true;
-                                  infoToBeEdited['text'] = list[i];
-                                  infoToBeEdited['index'] = i;
+                child: Observer(builder: (_) {
+                  List<String> list = _infoStore.infoList;
+                  return Card(
+                    elevation: 8,
+                    surfaceTintColor: Colors.white,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (_, i) {
+                          return ListTile(
+                            title: Text(
+                              list[i],
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14),
+                              maxLines: 5,
+                            ),
+                            trailing: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              alignment: WrapAlignment.end,
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: () {
+                                    editText = true;
+                                    infoToBeEdited['text'] = list[i];
+                                    infoToBeEdited['index'] = i;
 
-                                  infoTextController.text =
-                                      infoToBeEdited['text'];
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
-                                  size: 30,
+                                    infoTextController.text =
+                                        infoToBeEdited['text'];
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 30,
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.close,
-                                  size: 20,
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.close,
+                                    size: 20,
+                                  ),
+                                  color: Colors.white,
+                                  style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll<Color>(
+                                            Color.fromARGB(255, 187, 16, 4)),
+                                  ),
+                                  onPressed: () {
+                                    _infoStore.deleteInfo(i);
+                                  },
                                 ),
-                                color: Colors.white,
-                                style: const ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStatePropertyAll<Color>(
-                                          Color.fromARGB(255, 187, 16, 4)),
-                                ),
-                                onPressed: () {
-                                  
-                                  setState(() {
-                                    controller.deleteInfo(i);
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, _) =>
-                          const Divider(),
-                      itemCount: list.length),
-                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, _) =>
+                            const Divider(),
+                        itemCount: list.length),
+                  );
+                }),
               ),
               const SizedBox(height: 50),
               TextField(
@@ -130,13 +129,12 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 onSubmitted: (value) {
                   editText
-                      ? controller.editInfo(
+                      ? _infoStore.editInfo(
                           infoToBeEdited['index'], infoTextController.text)
-                      : controller.addInfo(infoTextController.text);
+                      : _infoStore.addInfo(infoTextController.text);
                   infoTextController.clear();
                   editText = false;
                 },
-                
               )
             ],
           ),
