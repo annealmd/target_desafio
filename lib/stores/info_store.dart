@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'info_store.g.dart';
 
 class InfoStore = InfoStoreBase with _$InfoStore;
 
 abstract class InfoStoreBase with Store {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @observable
   // ignore: prefer_final_fields
   ObservableList<String> _infoList = ObservableList<String>();
@@ -16,6 +18,7 @@ abstract class InfoStoreBase with Store {
   @action
   List<String> addInfo(String info) {
     _infoList.add(info);
+    
     return _infoList;
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:target_test/stores/info_store.dart';
+import 'package:target_test/views/functions/functions.dart';
 
 import 'widgets/politica_privacidade_button.dart';
 
@@ -96,7 +97,9 @@ class _InfoPageState extends State<InfoPage> {
                                             Color.fromARGB(255, 187, 16, 4)),
                                   ),
                                   onPressed: () {
-                                    _infoStore.deleteInfo(i);
+                                    myShowDialog(context, i);
+
+                                    //
                                   },
                                 ),
                               ],
@@ -128,12 +131,16 @@ class _InfoPageState extends State<InfoPage> {
                   fillColor: Colors.white,
                 ),
                 onSubmitted: (value) {
-                  editText
-                      ? _infoStore.editInfo(
-                          infoToBeEdited['index'], infoTextController.text)
-                      : _infoStore.addInfo(infoTextController.text);
-                  infoTextController.clear();
-                  editText = false;
+                  if (infoTextController.text.isEmpty) {
+                    //TODO popup
+                  } else {
+                    editText
+                        ? _infoStore.editInfo(infoToBeEdited['index'],
+                            infoTextController.text.trim())
+                        : _infoStore.addInfo(infoTextController.text.trim());
+                    infoTextController.clear();
+                    editText = false;
+                  }
                 },
               )
             ],
@@ -148,5 +155,49 @@ class _InfoPageState extends State<InfoPage> {
         child: const PoliticaPrivacidadeButton(),
       ),
     );
+  }
+
+  Future<void> myShowDialog(BuildContext context, int i) {
+    return showDialog<void>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title:
+                                            const Text('Apagar Informação'),
+                                        content: const Text(
+                                          'A informação será apagada e não será possível recuperá-la.',
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              textStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge,
+                                            ),
+                                            child: const Text('Cancelar'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              textStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge,
+                                            ),
+                                            child: const Text(
+                                              'Apagar',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(255, 134, 10, 1)),
+                                            ),
+                                            onPressed: () {
+                                              _infoStore.deleteInfo(i);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
   }
 }

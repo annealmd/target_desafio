@@ -14,7 +14,6 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
- 
 
   @override
   void dispose() {
@@ -123,8 +122,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        debugPrint('Everything alright!');
-                      } else {}
+                        Navigator.popAndPushNamed(context, '/infopage');
+                      } else {
+                        //TODO POPUP
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorButton,

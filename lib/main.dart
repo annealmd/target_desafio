@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2b8586)),
         useMaterial3: true,
       ),
-      home: const InfoPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/infopage': (context) => const InfoPage(),
+      },
     );
   }
 }
