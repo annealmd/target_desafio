@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
 
-import 'widgets/politica_privacidade_button.dart';
+import 'functions/functions.dart';
+import 'widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,13 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [colorOne, colorTwo],
-          ),
-        ),
+        decoration: backgroundPage,
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -53,34 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                TextFormField(
-                  controller: userController,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Informe um nome de usuário';
-                    } else if (value.length > 21) {
-                      userController.clear();
-                      return 'Deve ter no máximo 20 caracteres';
-                    } else if (!RegExp(r'^[a-zA-Z0-9\s]*[^\s]$')
-                        .hasMatch(value)) {
-                      userController.clear();
-                      return 'Não deve conter espaço em branco no final.';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+                UserWidget(userController: userController),
                 const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -89,34 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: true,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.lock),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value!.length < 2) {
-                      passwordController.clear();
-                      return 'Deve ter no mínimo 2 caracteres';
-                    } else if (value.length > 21) {
-                      passwordController.clear();
-                      return 'Deve ter no máximo 20 caracteres';
-                    } else if (!RegExp(r'^[a-zA-Z0-9]*[^\\s]$')
-                        .hasMatch(value)) {
-                      passwordController.clear();
-                      return 'Deve conter apenas letras e números';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+                PasswordWidget(passwordController: passwordController),
                 const SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
@@ -124,7 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                       if (formKey.currentState!.validate()) {
                         Navigator.popAndPushNamed(context, '/infopage');
                       } else {
-                        //TODO POPUP
+                        myShowSnackBar(
+                            context: context,
+                            message: 'Preencha os campos corretamente.');
                       }
                     },
                     style: ElevatedButton.styleFrom(

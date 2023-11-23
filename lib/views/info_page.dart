@@ -4,7 +4,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:target_test/stores/info_store.dart';
 import 'package:target_test/views/functions/functions.dart';
 
-import 'widgets/politica_privacidade_button.dart';
+import 'widgets/widgets.dart';
+
+
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -37,13 +39,7 @@ class _InfoPageState extends State<InfoPage> {
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [colorOne, colorTwo],
-          ),
-        ),
+        decoration: backgroundPage,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

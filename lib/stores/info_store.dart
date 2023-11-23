@@ -7,7 +7,7 @@ part 'info_store.g.dart';
 class InfoStore = InfoStoreBase with _$InfoStore;
 
 abstract class InfoStoreBase with Store {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  //final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @observable
   // ignore: prefer_final_fields
   ObservableList<String> _infoList = ObservableList<String>();
