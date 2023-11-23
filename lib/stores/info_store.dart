@@ -23,10 +23,9 @@ abstract class InfoStoreBase with Store {
   // Initialize SharedPreferences
   Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    await _loadInfoList(); // Move this call after initializing _prefs
+    await _loadInfoList();
   }
 
-  // Load infoList from SharedPreferences
   Future<void> _loadInfoList() async {
     final List<String>? storedList = _prefs.getStringList('infoList');
     if (storedList != null) {
@@ -34,7 +33,6 @@ abstract class InfoStoreBase with Store {
     }
   }
 
-  // Save infoList to SharedPreferences
   Future<void> _saveInfoList() async {
     await _prefs.setStringList('infoList', _infoList.toList());
   }
