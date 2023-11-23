@@ -7,32 +7,54 @@ part 'info_store.g.dart';
 class InfoStore = InfoStoreBase with _$InfoStore;
 
 abstract class InfoStoreBase with Store {
-  //final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late SharedPreferences _prefs;
+
   @observable
-  // ignore: prefer_final_fields
   ObservableList<String> _infoList = ObservableList<String>();
 
   @computed
   ObservableList<String> get infoList => _infoList;
 
+  // Constructor to initialize SharedPreferences
+  InfoStoreBase() {
+    _initPrefs();
+  }
+
+  // Initialize SharedPreferences
+  Future<void> _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    await _loadInfoList(); // Move this call after initializing _prefs
+  }
+
+  // Load infoList from SharedPreferences
+  Future<void> _loadInfoList() async {
+    final List<String>? storedList = _prefs.getStringList('infoList');
+    if (storedList != null) {
+      _infoList.addAll(storedList);
+    }
+  }
+
+  // Save infoList to SharedPreferences
+  Future<void> _saveInfoList() async {
+    await _prefs.setStringList('infoList', _infoList.toList());
+  }
+
   @action
-  List<String> addInfo(String info) {
+  Future<void> addInfo(String info) async {
     _infoList.add(info);
-    
-    return _infoList;
+    await _saveInfoList();
   }
 
   @action
-  ObservableList<String> editInfo(int index, String info) {
+  Future<void> editInfo(int index, String info) async {
     _infoList[index] = info;
-    return _infoList;
+    await _saveInfoList();
   }
 
   @action
-  ObservableList<String> deleteInfo(int index) {
+  Future<void> deleteInfo(int index) async {
     debugPrint(_infoList[index]);
     _infoList.removeAt(index);
-
-    return _infoList;
+    await _saveInfoList();
   }
 }

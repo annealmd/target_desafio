@@ -33,40 +33,28 @@ mixin _$InfoStore on InfoStoreBase, Store {
     });
   }
 
-  late final _$InfoStoreBaseActionController =
-      ActionController(name: 'InfoStoreBase', context: context);
+  late final _$addInfoAsyncAction =
+      AsyncAction('InfoStoreBase.addInfo', context: context);
 
   @override
-  List<String> addInfo(String info) {
-    final _$actionInfo = _$InfoStoreBaseActionController.startAction(
-        name: 'InfoStoreBase.addInfo');
-    try {
-      return super.addInfo(info);
-    } finally {
-      _$InfoStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> addInfo(String info) {
+    return _$addInfoAsyncAction.run(() => super.addInfo(info));
   }
 
-  @override
-  ObservableList<String> editInfo(int index, String info) {
-    final _$actionInfo = _$InfoStoreBaseActionController.startAction(
-        name: 'InfoStoreBase.editInfo');
-    try {
-      return super.editInfo(index, info);
-    } finally {
-      _$InfoStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
+  late final _$editInfoAsyncAction =
+      AsyncAction('InfoStoreBase.editInfo', context: context);
 
   @override
-  ObservableList<String> deleteInfo(int index) {
-    final _$actionInfo = _$InfoStoreBaseActionController.startAction(
-        name: 'InfoStoreBase.deleteInfo');
-    try {
-      return super.deleteInfo(index);
-    } finally {
-      _$InfoStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> editInfo(int index, String info) {
+    return _$editInfoAsyncAction.run(() => super.editInfo(index, info));
+  }
+
+  late final _$deleteInfoAsyncAction =
+      AsyncAction('InfoStoreBase.deleteInfo', context: context);
+
+  @override
+  Future<void> deleteInfo(int index) {
+    return _$deleteInfoAsyncAction.run(() => super.deleteInfo(index));
   }
 
   @override

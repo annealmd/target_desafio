@@ -6,8 +6,6 @@ import 'package:target_test/views/functions/functions.dart';
 
 import 'widgets/widgets.dart';
 
-
-
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
 
@@ -48,6 +46,7 @@ class _InfoPageState extends State<InfoPage> {
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: Observer(builder: (_) {
                   List<String> list = _infoStore.infoList;
+                  //List<String> list = _infoStore.loadInfoList();
                   return Card(
                     elevation: 8,
                     surfaceTintColor: Colors.white,
@@ -110,8 +109,8 @@ class _InfoPageState extends State<InfoPage> {
               ),
               const SizedBox(height: 50),
               TextField(
-                autofocus: true,
-                //focusNode: infoFocusNode,
+                autofocus: true, //comenta aqui
+                //focusNode: infoFocusNode, // descomenta essa linha
                 showCursor: true,
                 controller: infoTextController,
                 maxLength: 50,
