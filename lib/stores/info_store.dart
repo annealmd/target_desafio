@@ -15,12 +15,10 @@ abstract class InfoStoreBase with Store {
   @computed
   ObservableList<String> get infoList => _infoList;
 
-  // Constructor to initialize SharedPreferences
   InfoStoreBase() {
     _initPrefs();
   }
 
-  // Initialize SharedPreferences
   Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
     await _loadInfoList();
