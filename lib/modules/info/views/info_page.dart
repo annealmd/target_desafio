@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:target_test/core/functions/functions.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+<<<<<<< HEAD
 import 'package:target_test/modules/info/models/info_model.dart';
+=======
+>>>>>>> 6415cf5e6dc9020d31cf27022dd51d488194bbb9
 import 'package:target_test/modules/info/stores/info_store.dart';
 import '../../../core/widgets/politica_privacidade_button.dart';
 import 'functions/functions.dart';
