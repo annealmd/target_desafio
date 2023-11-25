@@ -1,8 +1,21 @@
 # PROVA FLUTTER
 Faça um aplicativo em Flutter que atenda os requisitos aqui listados se aproximando o máximo
 possível das imagens de exemplo.
+
+## Desisões de Projeto durante o desenvolvimento
+### Uso de api externa MockApi
+- O MockApi permite apenas o get, os outros endpoints não estão disponíveis na versão gratuita.
+- O projeto usa o ToDo do **JsonPlaceHolder** que permite o CRUD completo porém não altera os dados no servidor. Sendo assim, foi feita uma pequena adaptação usando um set para não ter dados duplicados e também para que as alterações salvas com o sharedpreferences não fossem perdidas no loading.</br>
+ **info_service_test.dart** mostra que todos os endpoints do CRUD estão funcionando de acordo a documentação.
+
+### O foco de digitação permanente no campo 'Digite o seu texto'
+- Por questão de design, aparência, o foco está no campo na abertura da página (info_page.dart) - porém, não está permanente.
+- A alteração para foco permanente pode ser feita de forma simples comentando a linha 112 e descomentando a 113.</br>
+                linha 112  autofocus: true, *//comenta essa linha*</br>
+                linha 113 //focusNode: infoFocusNode, *// descomenta essa linha*
+
 ## Tela de login
-Uma tela de autenƟcação onde o usuário é obrigado a digitar seu login e senha.
+Uma tela de autenticação onde o usuário é obrigado a digitar seu login e senha.
 ### A tela deve conter
 - Um Campo de senha
 - Um campo de texto para representar o Login
@@ -22,11 +35,7 @@ google.com.br deve ser aberta.
 
 *Não é necessário validar as informações em uma API Externa, mas caso seja feito um mockAPI
 contara como um diferencial*
-As apis externas apenas permitem o uso do get (mockAPI cobra pelos outros endpoints).
 
-**Estou usando o ToDo do JsonPlaceholder**, não modifica o bd no servidor, mas pelos testes 
-é possível ver que está fazendo o update e delete de dados.
-### info_service_test.dart
 
 <img src="login_page.png"  height="500">
 
@@ -41,11 +50,10 @@ ordem.
 ### Como a tela deve se comportar
 - O foco da digitação deve estar o tempo todo no campo de "Digite seu texto" e não pode
 ser perdido ao interagir com a tela. 
-**o foco o tempo todo no campo não ficou legal:** há comentários nas linhas 112 e 113 da info_page.dart 
 - Ao acionar o "enter" o campo tem que verificar se a informação foi preenchida.
 - O Card principal deve receber a informação digitada do campo.
-- As informações precisam ser salvas e lidas uƟlizando a biblioteca shared_ preferences
-(hƩps://pub.dev/packages/shared_preferences)
+- As informações precisam ser salvas e lidas utilizando a biblioteca shared_ preferences
+(https://pub.dev/packages/shared_preferences)
 - O Icone de excluir deve abrir um pop-up confirmando a ação.
 - Obrigatório a utilização do plugin MOBX para a construção da tela.
 
