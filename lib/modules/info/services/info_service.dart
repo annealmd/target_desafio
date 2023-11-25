@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:target_test/modules/models/info_model.dart';
+import 'package:target_test/modules/info/models/info_model.dart';
 
 class InfoService {
   var baseUrl = 'jsonplaceholder.typicode.com';
@@ -29,7 +29,7 @@ class InfoService {
     }
   }
 
-  Future<InfoModel> addInfo(InfoModel item) async {
+  Future<InfoModel> createInfo(InfoModel item) async {
     var addItem = item.toJson();
     var uri = Uri.https(baseUrl, '/todos', {'_limit': '3'});
     var response = await http.post(
@@ -49,7 +49,7 @@ class InfoService {
     }
   }
 
-  Future<InfoModel> updatedInfo(InfoModel item) async {
+  Future<InfoModel> updateInfo(InfoModel item) async {
     var addItem = item.toJson();
     var uri = Uri.https(baseUrl, '/todos/${item.id}');
     var response = await http.put(

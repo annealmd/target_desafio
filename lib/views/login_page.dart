@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
 
-import 'functions/functions.dart';
+import '../core/functions/functions.dart';
+import '../core/widgets/politica_privacidade_button.dart';
+
 import 'widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
