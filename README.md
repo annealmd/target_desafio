@@ -22,6 +22,11 @@ google.com.br deve ser aberta.
 
 *Não é necessário validar as informações em uma API Externa, mas caso seja feito um mockAPI
 contara como um diferencial*
+As apis externas apenas permitem o uso do get (mockAPI cobra pelos outros endpoints).
+
+**Estou usando o ToDo do JsonPlaceholder**, não modifica o bd no servidor, mas pelos testes 
+é possível ver que está fazendo o update e delete de dados.
+### info_service_test.dart
 
 <img src="login_page.png"  height="500">
 
