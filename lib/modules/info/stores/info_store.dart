@@ -26,14 +26,21 @@ abstract class InfoStoreBase with Store {
 
   Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
+    await _loadDatabase();
     await _loadInfoList();
+  }
+
+  Future<void> _loadDatabase() async {
+    var dbList = await service.getInfo();
+    Set<int?> existingIds = _infoList.map((info) => info.id).toSet();
+    _infoList.addAll(dbList.where(
+        (dbItem) => !existingIds.contains(dbItem.id))); // add from database
   }
 
   Future<void> _loadInfoList() async {
     final List<String>? storedList = _prefs.getStringList('infoList');
     if (storedList != null) {
       _infoList.addAll(storedList.map((e) => InfoModel.fromJson(e)));
-      //_infoList.addAll(storedList);
     }
   }
 
@@ -44,18 +51,20 @@ abstract class InfoStoreBase with Store {
 
   @action
   Future<void> addInfo(String infoText) async {
-    var uuid = Uuid().v4();
+    var uuid = const Uuid().v4();
     InfoModel info = InfoModel(
         title: infoText, id: int.parse(uuid.split('-').first, radix: 16));
     debugPrint(
         '****************${int.parse(uuid.split('-').first, radix: 16)}');
     _infoList.add(info);
+    await service.createInfo(info); // create database
     await _saveInfoList();
   }
 
   @action
   Future<void> editInfo(String infoTitle, int index) async {
     _infoList[index] = _infoList[index].copyWith(title: infoTitle);
+    await service.updateInfo(_infoList[index]); //update database
     await _saveInfoList();
   }
 
@@ -63,6 +72,8 @@ abstract class InfoStoreBase with Store {
   Future<void> deleteInfo(int index) async {
     debugPrint('${_infoList[index]}');
     _infoList.removeAt(index);
+    await service.deleteInfo(_infoList[index].id!); //delete database
+    debugPrint('**********${_infoList[index].id}');
     await _saveInfoList();
   }
 }
