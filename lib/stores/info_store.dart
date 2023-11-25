@@ -10,6 +10,7 @@ abstract class InfoStoreBase with Store {
   late SharedPreferences _prefs;
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<String> _infoList = ObservableList<String>();
 
   @computed
