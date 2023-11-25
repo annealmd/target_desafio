@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:target_test/modules/info_service.dart';
-import 'package:target_test/modules/models/info_model.dart';
+import 'package:target_test/modules/info/services/info_service.dart';
+import 'package:target_test/modules/info/models/info_model.dart';
 
 void main() {
   late InfoService sut;

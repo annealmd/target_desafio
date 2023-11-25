@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:target_test/modules/models/info_model.dart';
+import 'package:target_test/modules/info/models/info_model.dart';
 
 class InfoService {
   var baseUrl = 'jsonplaceholder.typicode.com';

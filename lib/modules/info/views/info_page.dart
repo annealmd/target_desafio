@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:target_test/core/functions/functions.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:target_test/stores/info_store.dart';
-import 'package:target_test/views/functions/functions.dart';
-
-import 'widgets/widgets.dart';
+import 'package:target_test/modules/info/stores/info_store.dart';
+import '../../../core/widgets/politica_privacidade_button.dart';
+import 'functions/functions.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
