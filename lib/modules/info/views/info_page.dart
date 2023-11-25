@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:target_test/core/functions/functions.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:target_test/modules/info/models/info_model.dart';
 import 'package:target_test/modules/info/stores/info_store.dart';
 import '../../../core/widgets/politica_privacidade_button.dart';
 import 'functions/functions.dart';
@@ -45,8 +46,7 @@ class _InfoPageState extends State<InfoPage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: Observer(builder: (_) {
-                  List<String> list = _infoStore.infoList;
-                  //List<String> list = _infoStore.loadInfoList();
+                  List<InfoModel> list = _infoStore.infoList;
                   return Card(
                     elevation: 8,
                     surfaceTintColor: Colors.white,
@@ -55,7 +55,7 @@ class _InfoPageState extends State<InfoPage> {
                         itemBuilder: (_, i) {
                           return ListTile(
                             title: Text(
-                              list[i],
+                              list[i].title,
                               style: const TextStyle(
                                   overflow: TextOverflow.clip,
                                   fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _InfoPageState extends State<InfoPage> {
                                 IconButton(
                                   onPressed: () {
                                     editText = true;
-                                    infoToBeEdited['text'] = list[i];
+                                    infoToBeEdited['text'] = list[i].title;
                                     infoToBeEdited['index'] = i;
 
                                     infoTextController.text =
@@ -130,10 +130,13 @@ class _InfoPageState extends State<InfoPage> {
                     myShowSnackBar(
                         context: context, message: 'Digite o seu Texto');
                   } else {
+                    String infoTitle = infoTextController.text.trim();
                     editText
-                        ? _infoStore.editInfo(infoToBeEdited['index'],
-                            infoTextController.text.trim())
-                        : _infoStore.addInfo(infoTextController.text.trim());
+                        ? _infoStore.editInfo(
+                            infoTitle,
+                            infoToBeEdited['index'],
+                          )
+                        : _infoStore.addInfo(infoTitle);
                     infoTextController.clear();
                     editText = false;
                   }

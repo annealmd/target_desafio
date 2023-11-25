@@ -2,16 +2,16 @@ import 'dart:convert';
 
 
 class InfoModel {
-  final int userId;
-  final int id;
+  final int? userId;
+  final int? id;
   final String title;
-  final bool completed;
+  final bool? completed;
 
   InfoModel({
-    required this.userId,
-    required this.id,
+     this.userId,
+    this.id,
     required this.title,
-    required this.completed,
+    this.completed,
   });
 
   InfoModel copyWith({

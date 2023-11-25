@@ -35,7 +35,7 @@ void main() {
   });
   test('should delete the item  and return true', () async {
     var item = InfoModel(userId: 1, id: 2, title: 'quis ut', completed: false);
-    var result = await sut.deleteInfo(item.id);
+    var result = await sut.deleteInfo(item.id!);
     debugPrint('********** $result');
 
     expect(result, isA<bool>());
