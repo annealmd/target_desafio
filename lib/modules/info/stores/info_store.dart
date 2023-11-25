@@ -26,7 +26,7 @@ abstract class InfoStoreBase with Store {
 
   Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    await _loadDatabase();
+
     await _loadInfoList();
   }
 
@@ -41,6 +41,7 @@ abstract class InfoStoreBase with Store {
     final List<String>? storedList = _prefs.getStringList('infoList');
     if (storedList != null) {
       _infoList.addAll(storedList.map((e) => InfoModel.fromJson(e)));
+      await _loadDatabase();
     }
   }
 
