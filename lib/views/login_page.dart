@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
+import 'package:target_test/core/widgets/widgets.dart';
 
 import '../core/functions/functions.dart';
-import '../core/widgets/politica_privacidade_button.dart';
 
 import 'widgets/widgets.dart';
 
@@ -86,12 +86,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-          color: colorTwo,
-          width: double.infinity,
-          alignment: Alignment.center,
-          height: 80,
-          child: const PoliticaPrivacidadeButton()),
+      bottomNavigationBar: const BottomContainer(),
     );
   }
 }
+
