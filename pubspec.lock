@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_injector:
+    dependency: transitive
+    description:
+      name: auto_injector
+      sha256: "2b0a076df2dd300ba3acfc270653f351fadf4d7889f042cd853f80ac83661af7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -230,6 +238,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  flutter_modular:
+    dependency: "direct main"
+    description:
+      name: flutter_modular
+      sha256: "0d50176ce394b792b447ee1c73e51e60c42b028a07b1974f3930f962c5f5e933"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.4+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -376,6 +392,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  modular_core:
+    dependency: transitive
+    description:
+      name: modular_core
+      sha256: fbcc3683dedbe0ccd1d75636c94c057b56c5ec4e068cc0ac40cefd5ba27c109c
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3+1"
   nested:
     dependency: transitive
     description:
@@ -472,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  result_dart:
+    dependency: transitive
+    description:
+      name: result_dart
+      sha256: f28a171d55e2e1c1753b41d4d8edcaff886f103e73c575d14764913907e57928
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -32,6 +32,7 @@ abstract class InfoStoreBase with Store {
 
   Future<void> _loadDatabase() async {
     var dbList = await service.getInfo();
+    debugPrint('************** DBLIst ${dbList.length}');
     Set<int?> existingIds = _infoList.map((info) => info.id).toSet();
     _infoList.addAll(dbList.where(
         (dbItem) => !existingIds.contains(dbItem.id))); // add from database

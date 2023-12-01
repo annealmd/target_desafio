@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:target_test/core/widgets/widgets.dart';
 
-import '../core/functions/functions.dart';
+import '../../../core/functions/functions.dart';
 
 import 'widgets/widgets.dart';
 
@@ -67,6 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                       if (formKey.currentState!.validate()) {
                         Navigator.popAndPushNamed(context, '/infopage');
                       } else {
+                        passwordController.clear();
+                        userController.clear();
                         myShowSnackBar(
                             context: context,
                             message: 'Preencha os campos corretamente.');
@@ -90,4 +92,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
