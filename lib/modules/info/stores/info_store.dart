@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:target_test/modules/info/models/info_model.dart';
-import 'package:target_test/modules/info/services/info_service.dart';
+
 import 'package:uuid/uuid.dart';
+
+import '../services/i_service.dart';
 
 part 'info_store.g.dart';
 
@@ -11,7 +14,7 @@ class InfoStore = InfoStoreBase with _$InfoStore;
 
 abstract class InfoStoreBase with Store {
   late SharedPreferences _prefs;
-  final InfoService service = InfoService();
+  final IService service = Modular.get<IService>();
 
   @observable
   // ignore: prefer_final_fields

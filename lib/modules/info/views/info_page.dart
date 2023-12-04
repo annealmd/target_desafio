@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:target_test/core/functions/functions.dart';
 import 'package:target_test/core/theme.dart';
 import 'package:target_test/core/widgets/widgets.dart';
@@ -16,7 +17,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   final TextEditingController infoTextController = TextEditingController();
-  final _infoStore = InfoStore();
+  final _infoStore = Modular.get<InfoStore>();
 
   final FocusNode infoFocusNode = FocusNode();
   bool editText = false;

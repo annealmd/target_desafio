@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:target_test/modules/info/services/info_service.dart';
 import 'package:target_test/modules/info/models/info_model.dart';
 
 void main() {
+  late http.Client client;
   late InfoService sut;
 
   setUpAll(() {
-    sut = InfoService();
+    client = http.Client();
+
+    sut = InfoService(client: client);
   });
 
   test('should return 3 InfoModels', () async {
