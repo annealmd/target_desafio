@@ -11,6 +11,7 @@ class UserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('User_Widget'),
       controller: userController,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,

@@ -33,15 +33,19 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     infoFocusNode.requestFocus();
     return Scaffold(
+      key: const Key('Scaffold_InfoPage'),
         backgroundColor: colorTwo,
         body: Container(
+          key: const Key('Container1_InfoPage'),
           alignment: Alignment.center,
           width: double.maxFinite,
           height: double.maxFinite,
           padding: const EdgeInsets.symmetric(horizontal: 25),
           decoration: backgroundPage,
           child: SingleChildScrollView(
+            key: const Key('SCSV_InfoPage'),
             child: Column(
+              key: const Key('Column_InfoPage'),
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -49,13 +53,17 @@ class _InfoPageState extends State<InfoPage> {
                   child: Observer(builder: (_) {
                     List<InfoModel> list = _infoStore.infoList;
                     return Card(
+                      key: const Key('Card_InfoPage'),
                       elevation: 8,
                       surfaceTintColor: Colors.white,
                       child: ListView.separated(
+                        key: const Key('ListView_InfoPage'),
                           shrinkWrap: true,
                           itemBuilder: (_, i) {
                             return ListTile(
+                              key: const Key('ListTile_InfoPage'),
                               title: Text(
+                                key: const Key('title_InfoPage'),
                                 list[i].title,
                                 style: const TextStyle(
                                     overflow: TextOverflow.clip,
@@ -68,6 +76,7 @@ class _InfoPageState extends State<InfoPage> {
                                 alignment: WrapAlignment.end,
                                 children: <Widget>[
                                   IconButton(
+                                    key: const Key('Icon1_InfoPage'),
                                     onPressed: () {
                                       editText = true;
                                       infoToBeEdited['text'] = list[i].title;
@@ -82,6 +91,7 @@ class _InfoPageState extends State<InfoPage> {
                                     ),
                                   ),
                                   IconButton(
+                                    key: const Key('Icon2_InfoPage'),
                                     icon: const Icon(
                                       Icons.close,
                                       size: 20,
@@ -110,6 +120,7 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 const SizedBox(height: 50),
                 TextField(
+                  key: const Key('TextField_InfoPage'),
                   autofocus: true, //comenta aqui
                   //focusNode: infoFocusNode, // descomenta essa linha
                   showCursor: true,

@@ -11,6 +11,7 @@ class PasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('Password_Widget'),
       controller: passwordController,
       obscureText: true,
       textInputAction: TextInputAction.next,
