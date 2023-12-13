@@ -28,10 +28,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('Scaffold_LoginPage'),
       backgroundColor: colorTwo,
       body: Container(
-        key: const Key('Container1_LoginPage'),
         alignment: Alignment.center,
         width: double.maxFinite,
         height: double.maxFinite,
@@ -50,7 +48,6 @@ class _LoginPageState extends State<LoginPage> {
                 const Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
-                    key: Key('TextUser_LoginPage'),
                     'Usuário',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -60,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
                 const Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
-                    key: Key('TextSenha_LoginPage'),
                     'Senha',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -88,7 +84,6 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: const Size(200, 40),
                     ),
                     child: const Text(
-                      key: Key('TextButton_LoginPage'),
                       'Entrar',
                     ),
                   ),

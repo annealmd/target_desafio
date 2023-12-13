@@ -29,10 +29,10 @@ class UserWidget extends StatelessWidget {
         if (value!.isEmpty) {
           return 'Informe um nome de usuário';
         } else if (value.length > 21) {
-          userController.clear();
+          //userController.clear();
           return 'Deve ter no máximo 20 caracteres';
         } else if (!RegExp(r'^[a-zA-Z0-9\s]*[^\s]$').hasMatch(value)) {
-          userController.clear();
+          //userController.clear();
           return 'Não deve conter espaço em branco no final.';
         } else {
           return null;

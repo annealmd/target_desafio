@@ -25,13 +25,10 @@ class PasswordWidget extends StatelessWidget {
       ),
       validator: (value) {
         if (value!.length < 2) {
-          passwordController.clear();
           return 'Deve ter no mínimo 2 caracteres';
         } else if (value.length > 21) {
-          passwordController.clear();
           return 'Deve ter no máximo 20 caracteres';
-        } else if (!RegExp(r'^[a-zA-Z0-9]*[^\\s]$').hasMatch(value)) {
-          passwordController.clear();
+        } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
           return 'Deve conter apenas letras e números';
         } else {
           return null;
